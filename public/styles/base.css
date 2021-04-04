@@ -1,0 +1,31 @@
+
+#result{
+    background-color: gray;
+}
+#form{
+    background-color: gray;
+    width: 50%;
+    height: 50%;
+    text-align: center;
+}
+
+#button{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+#radio1,#radio2{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px;
+    display: inline-block;
+}
+#textArea{
+margin-top: 5%;
+}
+#container-form{
+    margin-left: 20%;
+}

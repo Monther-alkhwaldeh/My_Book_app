@@ -1,0 +1,27 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="./styles/base.css">
+        <link rel="stylesheet" href="./styles/layout.css">
+
+    </head>
+    <body>
+        <section id="result">
+            <section id="sec2">
+        <% searchResults.forEach(element => { %>
+            <img src="https://i.imgur.com/J5LVHEL.jpg" alt="">
+            <h2 id="img"><%= element.image   %></h2>
+            <h2 id="title"><%= element.title   %></h2>
+            <h2 id="author"><%= element.author   %></h2>
+            <p id="description"><%=  element.description %></p>
+            <% }) %>
+        </section>
+        </section>
+</body>
+</html>
