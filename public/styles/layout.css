@@ -1,7 +1,10 @@
 #result{
     display : grid;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
+    grid-template-columns: repeat(3,33.5%);
+    grid-template-rows: repeat(3,33.5%);
     width: 100%;
+    height: 150%;
     margin-left: auto;
     margin-right: auto;
 }
