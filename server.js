@@ -29,9 +29,9 @@ function showBooks(req, res) {
     return apiRes.body.items.map(book => new Book(book.volumeInfo))
   }).then(results => {
     res.render('pages/searches/show',{ searchResults: results })
-  }).catch((error) => { 
+  }).catch((error) => {    
     res.status(500).render('pages/error');
-  });
+  })
 }
 
 function Book(data) {
