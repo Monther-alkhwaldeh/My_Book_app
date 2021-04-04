@@ -29,3 +29,27 @@ margin-top: 5%;
 #container-form{
     margin-left: 20%;
 }
+#showh1{
+    padding: 3px;
+    background-color: black;
+    color: white;
+}
+#showh2{
+    padding: 3px;
+    background-color: rgb(102, 100, 100);
+    text-align: center;
+    color: white;
+}
+#newh1{
+    padding: 3px;
+    background-color: black;
+    color: white;
+}
+#newh2{
+    padding: 12px;
+    background-color: rgb(102, 100, 100);
+    text-align: center;
+    color: white;
+        margin-top: 0%;
+
+}
