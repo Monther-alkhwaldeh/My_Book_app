@@ -1,17 +1,10 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <link rel="stylesheet" href="./styles/base.css">
-        <link rel="stylesheet" href="./styles/layout.css">
-
-    </head>
+    <%- include('../../layout/head') %>
     <body>
+        <%- include('../../layout/header') %>
+
         <h1 id="showh1">My book app</h1> <br>
         <h2 id="showh2">Search Result </h2>
         <section id="result">
@@ -20,9 +13,18 @@
              <img src="<%= element.thumbnail%>" alt="">
             <h2 id="title"><%= element.title   %></h2>
             <h2 id="author"><%= element.author   %></h2>
-            <p id="description"><%=  element.description %></p>
+            <p id="description"><%=  element.description %></p> 
+            <form action="/books" method="POST">
+                <input type="hidden" value="<%= element.thumbnail %>" name="img">
+                <input type="hidden" value="<%= element.title %>" name="title">
+                <input type="hidden" value="<%= element.author%>" name="author">
+                <input type="hidden" value="<%= element.description%>" name="description">
+                <input type="hidden" value="<%= element.isbn%>" name="isbn">
+              <input type="submit" value="select this book">
+            </form>
         </section>
             <% }) %>
         </section>
+        <%- include('../../layout/footer') %>
 </body>
 </html>

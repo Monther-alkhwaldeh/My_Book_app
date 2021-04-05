@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-  <%- include('../layout/head') %>
+  <%- include('../../layout/head') %>
 
 <body>
-  <%- include('../layout/header') %>
-
+  <%- include('../../layout/header') %>
     <main>
         <h1>HomePage</h1>
         <ul>
@@ -21,6 +20,8 @@
                     <%= element.author %>
                   </p>
                   <a href='/books/<%= element.id %>' target="_blank" rel="noopener noreferrer">View details</a>
+                  <p><%= element.description %></p>
+                  <p><%= element.isbn %></p>
                 </li>
                 <% }); %>
                   <% } else { %>
@@ -28,6 +29,6 @@
                     <% } %>
           </ul>
     </main>
-    <%- include('../layout/footer') %>
+    <%- include('../../layout/footer') %>
 </body>
 </html>

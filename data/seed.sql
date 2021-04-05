@@ -1,0 +1,2 @@
+INSERT INTO booktable(title,author,isbn,image,description) VALUES ('Emily Lauer','The Harry Potter Generation','NOT FOUND','http://books.google.com/books/content?id=ODOODwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api%27,%27Description','not found') ,('Richard A. Spencer
+','Harry Potter and the Classical World', 'Not FOUND', 'http://books.google.com/books/content?id=7HgwCgAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api','not found Found');
