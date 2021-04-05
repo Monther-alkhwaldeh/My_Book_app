@@ -29,16 +29,16 @@ function showBooks(req, res) {
     return apiRes.body.items.map(book => new Book(book.volumeInfo))
   }).then(results => {
     res.render('pages/searches/show',{ searchResults: results })
-  }).catch((error) => {    
+  }).catch((error) => {
     res.status(500).render('pages/error');
   })
 }
 
 function Book(data) {
-  this.title = data.title;
-  this.author = data.authors;
-  this.description = data.description;
-//   this.thumbnail = data.imageLinks.thumbnail || `https://i.imgur.com/J5LVHEL.jpg`;
+  this.title = data.title? data.title:'Title was Found';
+  this.author = data.authors ? data.authors[0] :'Authors Were Found';
+  this.description = data.descriptio? data.description:'Description was Found';
+  this.thumbnail = data.imageLinks? data.imageLinks.thumbnail : 'https://i7.uihere.com/icons/829/139/596/thumbnail-caefd2ba7467a68807121ca84628f1eb.png';
 }
 app.listen(PORT, () => {
   console.log(`listening to PORT ${PORT}....`);
