@@ -5,23 +5,24 @@ const pg =require('pg');
 const app = express();
 const PORT = process.env.PORT;
 const DATABASE_URL=process.env.DATABASE_URL;
-// const client = new pg.Client(DATABASE_URL)
-const ENV = process.env.ENV || 'DEP';
-let client = '';
-if (ENV === 'DEP') {
-  client = new pg.Client({
-    connectionString: DATABASE_URL,
-    ssl: {
-      rejectUnauthorized: false
-    }
-  });
-} else {
-  client = new pg.Client({
-    connectionString: DATABASE_URL,
-  });
-}
+const client = new pg.Client(DATABASE_URL)
+// const ENV = process.env.ENV || 'DEP';
+// let client = '';
+// if (ENV === 'DEP') {
+//   client = new pg.Client({
+//     connectionString: DATABASE_URL,
+//     ssl: {
+//       rejectUnauthorized: false
+//     }
+//   });
+// } else {
+//   client = new pg.Client({
+//     connectionString: DATABASE_URL,
+//   });
+// }
 
 app.use(express.urlencoded({extended:true}));
+app
 
 app.use(express.static('public'))
 app.set('view engine', 'ejs');
@@ -55,8 +56,8 @@ function selectBook(req,res){
   const description= req.body.description;
   const value=[title,author,isbn,image,description];
   const sqlQuery='INSERT INTO booktable (title,author, isbn, image, description) VALUES($1, $2, $3,$4,$5) RETURNING id;';
-  client.query(sqlQuery, value).then(()=>{
-    res.redirect('/');
+  client.query(sqlQuery, value).then((element)=>{
+    res.redirect(`/books/${element.rows[0].id}`);
   }).catch(error=>{
     handleError(error,res);
   });
