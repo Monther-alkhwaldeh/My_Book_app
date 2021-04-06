@@ -5,30 +5,27 @@
 <body>
   <%- include('../../layout/header') %>
     <main>
-        <h1>HomePage</h1>
+        <h1>Details book</h1>
         <ul>
-            <% if (results.length) { %>
-                <p> Total of Book: <%= results.length %></p>
-
-              <% results.forEach(element=> { %>
                 <li>
-                    <img src=" <%= element.image %>" alt="">
+                    <img src=" <%= results[0].image %>" alt="">
                   <h4>
-                    <%= element.title %>
+                    <%= results[0].title %>
                   </h4>
                   <p>
-                    <%= element.author %>
+                    <%= results[0].author %>
                   </p>
-                  <a href='/books/<%= element.id %>' target="_blank" rel="noopener noreferrer">View details</a>
-                  <p><%= element.description %></p>
-                  <p><%= element.isbn %></p>
+                  <p><%= results[0].description %></p>
+                  <p><%= results[0].isbn %></p>
                 </li>
-                <% }); %>
-                  <% } else { %>
-                    <p>No data was found</p>
-                    <% } %>
-          </ul>
+                  </ul>
+                  <button onclick="disForm()">Update Details</button>
+                  <form action="/books/<%= results[0].id%>?_method=DELETE" method="POST">
+                    <input type="hidden" value="<%= results[0].id%>">                    
+                    <input type="submit" value="delete this Book">
+                  </form>
     </main>
-    <%- include('../../layout/footer') %>
+    <%- include('edit') %>
+    <script src="../js/app.js"></script>
 </body>
 </html>
