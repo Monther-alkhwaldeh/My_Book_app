@@ -5,25 +5,25 @@ const pg =require('pg');
 const app = express();
 const PORT = process.env.PORT;
 const DATABASE_URL=process.env.DATABASE_URL;
-const client = new pg.Client(DATABASE_URL)
-// const ENV = process.env.ENV || 'DEP';
-// let client = '';
-// if (ENV === 'DEP') {
-//   client = new pg.Client({
-//     connectionString: DATABASE_URL,
-//     ssl: {
-//       rejectUnauthorized: false
-//     }
-//   });
-// } else {
-//   client = new pg.Client({
-//     connectionString: DATABASE_URL,
-//   });
-// }
+const override = require('method-override');
+// const client = new pg.Client(DATABASE_URL);
 
+const ENV = process.env.ENV || 'DEP';
+let client = '';
+if (ENV === 'DEP') {
+  client = new pg.Client({
+    connectionString: DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false
+    }
+  });
+} else {
+  client = new pg.Client({
+    connectionString: DATABASE_URL,
+  });
+}
+app.use(override('_method'));
 app.use(express.urlencoded({extended:true}));
-app
-
 app.use(express.static('public'))
 app.set('view engine', 'ejs');
 app.get('/test', (req, res) => {
@@ -35,6 +35,9 @@ app.post('/books', selectBook);
 
 app.get('/', renderHome);
 app.get('/books/:id',bookDeatails);
+app.delete('/books/:id', deleteData);
+app.put('/books/:id', updateData);
+
 function displayForm(req, res) {
   res.render('pages/searches/new')
 }
@@ -42,6 +45,27 @@ function renderHome(req,res){
   const sqlQuery='SELECT * FROM booktable;';
   client.query(sqlQuery).then(results =>{
     res.render('pages/index',{results:results.rows});
+  }).catch((error) => {
+    handleError(error,res);
+  })
+}
+function updateData(req,res){
+  const book_id=req.params.id;
+  const {title,author,isbn,description}=req.body;
+  const safeValues=[title,author,isbn,description,book_id];
+  const updateQuery='UPDATE booktable SET title=$1, author=$2, isbn=$3, description=$4 WHERE id=$5;';
+  client.query(updateQuery,safeValues).then(results=>{
+    res.redirect(`/books/${book_id}`);
+  }).catch((error) => {
+    handleError(error,res);
+  })
+}
+function deleteData(req,res){
+  const book_id=req.params.id;
+  const safeValues=[book_id];
+  const sqlDelete='DELETE FROM booktable WHERE id=$1;'
+  client.query(sqlDelete,safeValues).then(()=>{
+    res.redirect('/');
   }).catch((error) => {
     handleError(error,res);
   })
